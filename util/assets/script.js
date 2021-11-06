@@ -8,6 +8,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 $('#body').html(data);
+                $('#update').hide();
             }
         });
     }
@@ -51,6 +52,7 @@ $(document).ready(function() {
                 $('#model').val(data.model);
                 $('#title').html('Update Vehicle');
                 $('#add').hide();
+                $('#update').show();
                 let found_id = val(data.id);
 
                 $('#action').val('update');
@@ -64,6 +66,7 @@ $(document).ready(function() {
                         $('#add_form')[0].reset();
                         window.alert(data);
                         load();
+                        
                     }
                 });
             }
