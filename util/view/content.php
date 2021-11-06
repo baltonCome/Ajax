@@ -12,7 +12,7 @@
             </div>
             <div class="form-group">
                 <input type="button" value="Save" class="btn btn-sm btn-success" id="add">
-                <input type="button" value="Update" class="btn btn-sm btn-success" id="update">
+                <input type="button" value="Update" class="btn btn-sm btn-success update" id="update">
                 <!--<button type="submit" class = "btn btn-sm btn-success" id="add">Save</button>--->
             </div>
         </form>

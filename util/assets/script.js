@@ -1,6 +1,7 @@
 $(document).ready(function() { 
 
     function load() {
+        $('#update').hide();
         $.ajax({
             url: '../../handler.php',
             type: 'POST',
@@ -8,7 +9,6 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 $('#body').html(data);
-                $('#update').hide();
             }
         });
     }
@@ -40,6 +40,23 @@ $(document).ready(function() {
         });
     });
 
+    let update_id = null;
+
+    $(document).on('click', '.update', function () {
+
+        $.ajax({
+            url: '../../handler.php',
+            type: 'POST',
+            data: {action: 'update', id:update_id, brand: $('#brand').val(), model: $('#model').val()},
+            dataType: 'json',
+            success: function(data) {
+                $('#add_form')[0].reset();
+                window.alert(data);
+                load();
+            }
+        });
+    });
+
     $(document).on('click', '.edit', function () {
 
         $.ajax({
@@ -53,22 +70,7 @@ $(document).ready(function() {
                 $('#title').html('Update Vehicle');
                 $('#add').hide();
                 $('#update').show();
-                let found_id = val(data.id);
-
-                $('#action').val('update');
-                $('#id').val(found_id);
-                
-                $.ajax({
-                    url: '../../handler.php',
-                    type: 'POST',
-                    data: {action: 'update', id:found_id, brand: $('#brand').val(), model: $('#model').val()},
-                    success: function(data) {
-                        $('#add_form')[0].reset();
-                        window.alert(data);
-                        load();
-                        
-                    }
-                });
+                update_id = data.id;
             }
         });
     });
