@@ -52,6 +52,8 @@ $(document).ready(function() {
             success: function(data) {
                 $('#add_form')[0].reset();
                 window.alert(data);
+                $('#add').show();
+                $('#title').html('Add Vehicle');
                 load();
             }
         });
@@ -82,13 +84,13 @@ $(document).ready(function() {
         $ajax({
             url: '../../handler.php',
             type: 'POST',
-            data: {action: 'save', keyword : keyword},          
+            data: {action: 'search', keyword : keyword},     
             dataType : 'json',
             success: function(data){
-                $('#body').html(data);
-                load();
+                $('#body > tr').remove();
+                data.length > 0 ? $('#body').html(data) : load();
             }
-        })
+        });
     });
     load();
 });

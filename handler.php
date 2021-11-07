@@ -19,22 +19,29 @@ if(isset($_POST['action'])){
         case 'search':
             if(isset($_POST['keyword'])){
 
-                $car = Car::getCars($_POST['keyword']);
-                $result ='';
-                foreach($car as $c){
-                    $result.=
-                        '<tr>
-                            <td>'. $c->id. '</td>
-                            <td>'. $c->brand. '</td>
-                            <td>'. $c->model. '</td>
-                            <td>
-                                <button class="btn btn-secondary btn-sm edit" id="'.$c->id.'" name="edit"> Edit </button>
-                                <button class="btn btn-danger btn-sm delete" id="'.$c->id.'"name="delete">Delete</button>
-                            </td>
-                        </tr>';
+                $keyword = $_POST['keyword'];
+                $result = '';
+                if(!empty($keyword)){
+                    if(is_numeric($keyword)){
+                        $car = Car::getCars("id = $keyword");
+                    }else{
+                        $car = Car::getCars("brand like '%$keyword%' or model like '%$keyword%'");
+                    }
+                    foreach($car as $c){
+                        $result.=
+                            '<tr>
+                                <td>'. $c->id. '</td>
+                                <td>'. $c->brand. '</td>
+                                <td>'. $c->model. '</td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm edit" id="'.$c->id.'" name="edit"> Edit </button>
+                                    <button class="btn btn-danger btn-sm delete" id="'.$c->id.'"name="delete">Delete</button>
+                                </td>
+                            </tr>';
+                    }
+                    $result = strlen($result) ? $result: '<tr> <td colspan= "6" class = "text-center"> EMPTY </td> </tr>';
+                    echo json_encode($result); 
                 }
-                $result = strlen($result) ? $result: '<tr> <td colspan= "6" class = "text-center"> EMPTY </td> </tr>';
-                echo json_encode($result);
             }
             break;
         case 'update':

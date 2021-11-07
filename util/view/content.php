@@ -13,7 +13,6 @@
             <div class="form-group">
                 <input type="button" value="Save" class="btn btn-sm btn-success" id="add">
                 <input type="button" value="Update" class="btn btn-sm btn-success update" id="update">
-                <!--<button type="submit" class = "btn btn-sm btn-success" id="add">Save</button>--->
             </div>
         </form>
     </section>
@@ -23,14 +22,9 @@
             <br/>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-6">
-                    <form class="card card-sm">
+                    <form class="card card-sm" action="" method="get">
                         <div class="row align-items-center">
-                            <div class="col">
-                                <input class="form-control form-control-borderless" type="search" placeholder="Search">
-                            </div>
-                            <div class="col-auto">
-                                <button class="btn btn-sm btn-success" type="submit">Search</button>
-                            </div>
+                            <input class="form-control form-control-borderless" type="search" placeholder="Search" id="search">
                         </div>
                     </form>
                 </div>
